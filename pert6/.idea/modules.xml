@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/pert6.iml" filepath="$PROJECT_DIR$/pert6.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/pert6_android.iml" filepath="$PROJECT_DIR$/android/pert6_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pert7.iml" filepath="$PROJECT_DIR$/pert7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/pert7_android.iml" filepath="$PROJECT_DIR$/android/pert7_android.iml" />
     </modules>
   </component>
 </project>
