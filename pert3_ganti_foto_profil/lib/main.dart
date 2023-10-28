@@ -139,11 +139,33 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
 
           SizedBox(height: 10), // Spacing
+          SizedBox(height: 10), // Spacing
           Text(
             'Musthofainal Akhyar Banifade',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
+            ),
+          ),
+          // Job Experience
+          SizedBox(height: 20),
+          Text(
+            'Job Experience:',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            '1. Software Engineer at ABC Tech (2020 - 2022)',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          Text(
+            '2. Frontend Developer at XYZ Inc. (2018 - 2020)',
+            style: TextStyle(
+              fontSize: 16,
             ),
           ),
           // ... (rest of your ProfilePage code)
