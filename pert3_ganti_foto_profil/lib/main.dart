@@ -150,6 +150,26 @@ class _ProfilePageState extends State<ProfilePage> {
           // Job Experience
           SizedBox(height: 20),
           Text(
+            'Education:',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            '1. Polytechnic Gajah Tunggal, Electrical Engineering (2013 - 2016)',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          Text(
+            '2. Esa Unggul University, Informatics Engineering (2020 - now)',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          SizedBox(height: 20),
+          Text(
             'Job Experience:',
             style: TextStyle(
               fontSize: 20,
@@ -157,18 +177,11 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Text(
-            '1. Software Engineer at ABC Tech (2020 - 2022)',
+            '1. Electric Installation Engineer at PT Gajah Tunggal, Tbk. (2016 - now)',
             style: TextStyle(
               fontSize: 16,
             ),
           ),
-          Text(
-            '2. Frontend Developer at XYZ Inc. (2018 - 2020)',
-            style: TextStyle(
-              fontSize: 16,
-            ),
-          ),
-          // ... (rest of your ProfilePage code)
         ],
       ),
     );
