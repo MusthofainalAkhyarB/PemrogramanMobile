@@ -50,6 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.search),
             label: 'Search',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Pembelian',
+          ),
         ],
       ),
     );
@@ -61,6 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
         return const HomeScreenContent();
       case 1:
         return const SearchScreen();
+      case 2:
+        return const PembelianScreen(); // Add the new screen here
       default:
         return Container(); // Handle other cases if needed
     }
@@ -155,20 +161,51 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
-      child: ListView.builder(
-        itemCount: groceryItems.length,
-        itemBuilder: (context, index) {
-          return CheckboxListTile(
-            title: Text(groceryItems[index]),
-            value: checklist[groceryItems[index]],
-            onChanged: (bool? value) {
-              setState(() {
-                checklist[groceryItems[index]] = value!;
-              });
+    return Column(
+      children: [
+        Expanded(
+          child: Scrollbar(
+            child: ListView.builder(
+              itemCount: groceryItems.length,
+              itemBuilder: (context, index) {
+                return CheckboxListTile(
+                  title: Text(groceryItems[index]),
+                  value: checklist[groceryItems[index]],
+                  onChanged: (bool? value) {
+                    setState(() {
+                      checklist[groceryItems[index]] = value!;
+                    });
+                  },
+                );
+              },
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ElevatedButton(
+            onPressed: () {
+              // Add your logic for the "Lanjut" button here
+              // For example, you can navigate to the next screen
+              // or perform some other action.
             },
-          );
-        },
+            child: Text('Beli'),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class PembelianScreen extends StatelessWidget {
+  const PembelianScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Halaman Pembelian',
+        style: TextStyle(fontSize: 24),
       ),
     );
   }
