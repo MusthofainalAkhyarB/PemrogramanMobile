@@ -66,7 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
         return const SearchScreen();
       case 2:
-        return const PembelianScreen(); // Add the new screen here
+        return const PembelianScreen(
+          selectedItems: [],
+        ); // Add the new screen here
       default:
         return Container(); // Handle other cases if needed
     }
@@ -150,6 +152,7 @@ class _SearchScreenState extends State<SearchScreen> {
   ];
 
   Map<String, bool> checklist = {};
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -159,21 +162,43 @@ class _SearchScreenState extends State<SearchScreen> {
     }
   }
 
+  List<String> _filterItems(String query) {
+    if (query.isEmpty) {
+      return groceryItems;
+    } else {
+      return groceryItems
+          .where((item) => item.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        TextField(
+          controller: searchController,
+          onChanged: (value) {
+            setState(() {
+              // You can perform some filtering logic here if needed
+            });
+          },
+          decoration: InputDecoration(
+            labelText: 'Cari item...',
+          ),
+        ),
         Expanded(
           child: Scrollbar(
             child: ListView.builder(
-              itemCount: groceryItems.length,
+              itemCount: _filterItems(searchController.text).length,
               itemBuilder: (context, index) {
                 return CheckboxListTile(
-                  title: Text(groceryItems[index]),
-                  value: checklist[groceryItems[index]],
+                  title: Text(_filterItems(searchController.text)[index]),
+                  value: checklist[_filterItems(searchController.text)[index]],
                   onChanged: (bool? value) {
                     setState(() {
-                      checklist[groceryItems[index]] = value!;
+                      checklist[_filterItems(searchController.text)[index]] =
+                          value!;
                     });
                   },
                 );
@@ -185,9 +210,22 @@ class _SearchScreenState extends State<SearchScreen> {
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton(
             onPressed: () {
-              // Add your logic for the "Lanjut" button here
-              // For example, you can navigate to the next screen
-              // or perform some other action.
+              // Get the selected items
+              List<String> selectedItems = [];
+              for (var item in groceryItems) {
+                if (checklist[item] == true) {
+                  selectedItems.add(item);
+                }
+              }
+
+              // Navigate to PembelianScreen with selected items
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      PembelianScreen(selectedItems: selectedItems),
+                ),
+              );
             },
             child: Text('Beli'),
           ),
@@ -198,14 +236,30 @@ class _SearchScreenState extends State<SearchScreen> {
 }
 
 class PembelianScreen extends StatelessWidget {
-  const PembelianScreen({Key? key}) : super(key: key);
+  final List<String> selectedItems;
+
+  const PembelianScreen({Key? key, required this.selectedItems})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Halaman Pembelian',
-        style: TextStyle(fontSize: 24),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Item yang dibeli:',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 16),
+            for (var item in selectedItems)
+              Text(
+                item,
+                style: TextStyle(fontSize: 18),
+              ),
+          ],
+        ),
       ),
     );
   }
