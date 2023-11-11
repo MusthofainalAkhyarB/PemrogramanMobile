@@ -116,11 +116,60 @@ class HomeScreenContent extends StatelessWidget {
   }
 }
 
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({Key? key});
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
+
+  @override
+  _SearchScreenState createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  List<String> groceryItems = [
+    'Beras',
+    'Minyak',
+    'Mie Instan',
+    'Roti',
+    'Telur',
+    'Ikan',
+    'Ayam',
+    'Daging',
+    'Bawang Putih',
+    'Bawang Merah',
+    'Bawang Bombay',
+    'Cabai',
+    'Merica',
+    'Ketumbar',
+    'Jahe',
+    'Kunyit',
+  ];
+
+  Map<String, bool> checklist = {};
+
+  @override
+  void initState() {
+    super.initState();
+    for (var item in groceryItems) {
+      checklist[item] = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(); // Blank or empty container for the search screen
+    return Scrollbar(
+      child: ListView.builder(
+        itemCount: groceryItems.length,
+        itemBuilder: (context, index) {
+          return CheckboxListTile(
+            title: Text(groceryItems[index]),
+            value: checklist[groceryItems[index]],
+            onChanged: (bool? value) {
+              setState(() {
+                checklist[groceryItems[index]] = value!;
+              });
+            },
+          );
+        },
+      ),
+    );
   }
 }
